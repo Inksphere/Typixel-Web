@@ -3,20 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CreativeAgency | Digital Design Agency</title>
+<title>CreativeAgency | Portfolio</title>
 
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* =====================
+   THEME
+===================== */
 :root {
   --bg: #ffffff;
   --text: #1E1E1E;
   --card: #ffffff;
   --nav: #0B2D3A;
   --accent: #00BBD4;
-  --light: #F5F7F8;
+  --muted: #6c757d;
 }
 
 body.dark {
@@ -26,15 +30,11 @@ body.dark {
   --nav: #020B12;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+/* =====================
+   GLOBAL
+===================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -42,17 +42,19 @@ body {
   color: var(--text);
 }
 
-/* NAVBAR */
+/* =====================
+   NAVBAR
+===================== */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   background: var(--nav);
-  padding: 18px 60px;
+  padding: 16px 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
+  z-index: 999;
 }
 
 .logo {
@@ -63,14 +65,12 @@ body {
 
 .navbar nav a {
   color: #fff;
-  margin-left: 28px;
+  margin-left: 25px;
   text-decoration: none;
   font-weight: 600;
 }
 
-.navbar nav a:hover {
-  color: var(--accent);
-}
+.navbar nav a:hover { color: var(--accent); }
 
 #themeToggle {
   background: none;
@@ -81,63 +81,129 @@ body {
   margin-left: 20px;
 }
 
-/* SECTIONS */
+/* =====================
+   SECTIONS
+===================== */
 section {
   padding: 100px 60px;
 }
 
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+p { color: var(--muted); }
+
+/* =====================
+   HERO
+===================== */
 .hero {
-  padding-top: 150px;
-  background: var(--light);
+  padding-top: 160px;
+  text-align: center;
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3.2rem;
   margin-bottom: 15px;
 }
 
+.hero span { color: var(--accent); }
+
 .hero p {
-  max-width: 600px;
-  margin-bottom: 30px;
+  max-width: 650px;
+  margin: 0 auto 30px;
 }
 
 .btn {
   background: var(--accent);
   color: #fff;
-  padding: 14px 32px;
-  border-radius: 30px;
+  padding: 14px 36px;
+  border-radius: 40px;
   text-decoration: none;
   font-weight: 600;
   border: none;
   cursor: pointer;
 }
 
-/* GRIDS */
-.service-grid,
-.portfolio-grid,
-.testimonial-grid {
+/* =====================
+   SERVICES
+===================== */
+.service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 30px;
 }
 
-.card {
+.service-card {
   background: var(--card);
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  padding: 30px;
+  border-radius: 16px;
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  transition: transform .3s;
 }
 
-.card img {
+.service-card:hover { transform: translateY(-8px); }
+
+/* =====================
+   PORTFOLIO
+===================== */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.portfolio-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.portfolio-card img {
   width: 100%;
-  height: 220px;
+  height: 230px;
   object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  transition: transform .4s;
 }
 
-/* CONTACT */
+.portfolio-card:hover img { transform: scale(1.1); }
+
+.portfolio-info {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: .4s;
+  font-weight: 600;
+}
+
+.portfolio-card:hover .portfolio-info { opacity: 1; }
+
+/* =====================
+   TESTIMONIALS
+===================== */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.testimonial {
+  background: var(--card);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+/* =====================
+   CONTACT
+===================== */
 .contact-box {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -159,7 +225,9 @@ section {
   border: 1px solid #ccc;
 }
 
-/* FOOTER */
+/* =====================
+   FOOTER
+===================== */
 footer {
   background: var(--nav);
   color: #fff;
@@ -167,32 +235,13 @@ footer {
   padding: 25px;
 }
 
-/* RESPONSIVE */
+/* =====================
+   RESPONSIVE
+===================== */
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px 25px;
-  }
-
-  section {
-    padding: 80px 25px;
-  }
-
-  .hero {
-    text-align: center;
-  }
-
-  .hero h1 {
-    font-size: 2.1rem;
-  }
-
-  .service-grid,
-  .portfolio-grid,
-  .testimonial-grid,
-  .contact-box {
-    grid-template-columns: 1fr;
-  }
+  section { padding: 80px 25px; }
+  .hero h1 { font-size: 2.2rem; }
+  .contact-box { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -203,33 +252,26 @@ footer {
   <div class="logo">CreativeAgency</div>
   <nav>
     <a href="#home">Home</a>
-    <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#portfolio">Portfolio</a>
-    <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
     <button id="themeToggle">🌙</button>
   </nav>
 </header>
 
 <section class="hero" id="home">
-  <h1>We Design Digital Experiences</h1>
-  <p>Helping brands grow with clean design, smart strategy, and modern technology.</p>
-  <a href="#contact" class="btn">Get Started</a>
-</section>
-
-<section id="about">
-  <h2>About Us</h2>
-  <p>We are a creative digital agency delivering professional design solutions.</p>
+  <h1>Creative <span>Design</span> Portfolio</h1>
+  <p>We craft stunning visuals and digital experiences that help brands stand out.</p>
+  <a href="#portfolio" class="btn">View Work</a>
 </section>
 
 <section id="services">
-  <h2>Our Services</h2>
+  <h2>Services</h2>
   <div class="service-grid">
-    <div class="card">Logo & Branding</div>
-    <div class="card">Poster & Flyer Design</div>
-    <div class="card">Web Design</div>
-    <div class="card">Social Media Design</div>
+    <div class="service-card">Logo & Branding</div>
+    <div class="service-card">Poster & Flyer Design</div>
+    <div class="service-card">Web Design</div>
+    <div class="service-card">Social Media Design</div>
   </div>
 </section>
 
@@ -237,39 +279,26 @@ footer {
   <h2>Portfolio</h2>
   <div class="portfolio-grid">
 
-    <div class="card">
-      <img src="website-mockup.png" loading="lazy" alt="Website Design">
-      <p>Website Design</p>
+    <div class="portfolio-card">
+      <img src="website-mockup.png" loading="lazy">
+      <div class="portfolio-info">Website Design</div>
     </div>
 
-    <div class="card">
-      <img src="cctv-brochure.jpg" loading="lazy" alt="Brochure Design">
-      <p>Brochure Design</p>
+    <div class="portfolio-card">
+      <img src="cctv-brochure.jpg" loading="lazy">
+      <div class="portfolio-info">Brochure Design</div>
     </div>
 
-    <div class="card">
-      <img src="branding-design-services.jpg" loading="lazy" alt="Branding">
-      <p>Creative Branding</p>
+    <div class="portfolio-card">
+      <img src="branding-design-services.jpg" loading="lazy">
+      <div class="portfolio-info">Branding</div>
     </div>
 
-    <div class="card">
-      <img src="attachment_147078313.png" loading="lazy" alt="Logo Design">
-      <p>Logo Design</p>
-    </div>
-
-  </div>
-</section>
-
-<section id="testimonials">
-  <h2>Testimonials</h2>
-  <div class="testimonial-grid">
-    <div class="card">“Amazing work and fast delivery.”</div>
-    <div class="card">“Professional and creative team.”</div>
   </div>
 </section>
 
 <section id="contact">
-  <h2>Contact Us</h2>
+  <h2>Contact</h2>
   <div class="contact-box">
     <div class="contact-info">
       <p>📧 hello@creativeagency.com</p>
@@ -278,9 +307,9 @@ footer {
     </div>
 
     <form class="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea rows="5" placeholder="Message"></textarea>
       <button class="btn">Send Message</button>
     </form>
   </div>
@@ -291,11 +320,10 @@ footer {
 </footer>
 
 <script>
-const toggle = document.getElementById("themeToggle");
-toggle.onclick = () => {
+const t = document.getElementById("themeToggle");
+t.onclick = () => {
   document.body.classList.toggle("dark");
-  toggle.textContent =
-    document.body.classList.contains("dark") ? "☀️" : "🌙";
+  t.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
 };
 </script>
 
