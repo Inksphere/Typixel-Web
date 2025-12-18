@@ -11,7 +11,7 @@
 <meta name="keywords" content="graphic design, branding, web design, portfolio">
 <meta name="author" content="CreativeAgency">
 
-<!-- FONT -->
+<!-- GOOGLE FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -101,9 +101,15 @@ p{text-align:center;color:var(--muted)}
 }
 .card{
   background:var(--card);
-  padding:30px;
+  padding:25px;
   border-radius:16px;
   box-shadow:0 10px 30px rgba(0,0,0,.08);
+  text-align:center;
+}
+.card img{
+  width:100%;
+  border-radius:12px;
+  margin-bottom:12px;
 }
 
 /* FOOTER */
@@ -138,37 +144,74 @@ footer{
     <a href="#home">Home</a>
     <a href="#services">Services</a>
     <a href="#portfolio">Portfolio</a>
+    <a href="#blog">Blog</a>
     <a href="#contact">Contact</a>
     <button id="themeToggle">🌙</button>
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <h1>Creative <span>Design</span> Portfolio</h1>
   <p>We design brands, websites and digital experiences.</p>
   <a href="#portfolio" class="btn">View Work</a>
 </section>
 
+<!-- SERVICES -->
 <section id="services">
   <h2>Services</h2>
   <div class="grid">
-    <div class="card">Logo & Branding</div>
-    <div class="card">Poster & Flyer Design</div>
-    <div class="card">Web Design</div>
-    <div class="card">Social Media Design</div>
+    <div class="card">
+      <img src="images/branding-design.jpg" alt="Branding">
+      <p>Logo & Branding</p>
+    </div>
+    <div class="card">
+      <img src="images/cctv-brochure.jpg" alt="Brochure">
+      <p>Poster & Flyer Design</p>
+    </div>
+    <div class="card">
+      <img src="images/website-mockup.png" alt="Web Design">
+      <p>Web Design</p>
+    </div>
+    <div class="card">
+      <img src="images/social-media.jpg" alt="Social Media">
+      <p>Social Media Design</p>
+    </div>
   </div>
 </section>
 
+<!-- PORTFOLIO -->
 <section id="portfolio">
   <h2>Portfolio</h2>
   <div class="grid">
-    <div class="card">Project 1</div>
-    <div class="card">Project 2</div>
-    <div class="card">Project 3</div>
-    <div class="card">Project 4</div>
+    <div class="card">
+      <img src="images/website-mockup.png">
+      <p>Website Project</p>
+    </div>
+    <div class="card">
+      <img src="images/cctv-brochure.jpg">
+      <p>Brochure Design</p>
+    </div>
+    <div class="card">
+      <img src="images/branding-design.jpg">
+      <p>Brand Identity</p>
+    </div>
+    <div class="card">
+      <img src="images/social-media.jpg">
+      <p>Social Media Campaign</p>
+    </div>
   </div>
 </section>
 
+<!-- BLOG -->
+<section id="blog">
+  <h2>Latest Blog</h2>
+  <div class="grid" id="blogPosts">
+    <div class="card">Blog posts will load from Firebase</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
   <div class="grid">
@@ -192,7 +235,7 @@ footer{
 
 <a href="https://wa.me/919000000000" class="whatsapp" target="_blank">💬</a>
 
-<!-- ✅ FIREBASE IMPORTS -->
+<!-- 🔥 FIREBASE MODULES -->
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/auth.js"></script>
 <script type="module" src="js/blog.js"></script>
