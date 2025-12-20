@@ -4,15 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>CreativeAgency | Portfolio</title>
+<title>CreativeAgency | Graphic Design Portfolio</title>
 
 <!-- SEO -->
-<meta name="description" content="CreativeAgency – Graphic design, branding & web design portfolio">
-<meta name="keywords" content="graphic design, branding, web design, portfolio">
+<meta name="description" content="CreativeAgency – Professional graphic design, branding & web design portfolio">
+<meta name="keywords" content="graphic design, branding, web design, portfolio, creative agency">
 <meta name="author" content="CreativeAgency">
 
 <!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- AOS ANIMATION LIBRARY -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- FONT AWESOME FOR ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root{
@@ -22,12 +28,9 @@
   --nav:#0b2d3a;
   --accent:#00bbd4;
   --muted:#6c757d;
-}
-body.dark{
-  --bg:#0e1621;
-  --text:#eaeaea;
-  --card:#162230;
-  --nav:#020b12;
+  --light-bg:#f8f9fa;
+  --success:#28a745;
+  --danger:#dc3545;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -35,6 +38,7 @@ body{
   font-family:'Poppins',sans-serif;
   background:var(--bg);
   color:var(--text);
+  overflow-x: hidden;
 }
 
 /* NAVBAR */
@@ -48,6 +52,8 @@ header{
   justify-content:space-between;
   align-items:center;
   z-index:1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 .logo{color:#fff;font-size:22px;font-weight:700}
 nav a{
@@ -55,11 +61,22 @@ nav a{
   margin-left:25px;
   text-decoration:none;
   font-weight:600;
+  position: relative;
+  transition: color 0.3s ease;
+}
+nav a:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
 }
 nav a:hover{color:var(--accent)}
-#themeToggle{
-  background:none;border:none;color:#fff;
-  font-size:18px;cursor:pointer;margin-left:15px
+nav a:hover:after {
+  width: 100%;
 }
 
 /* MOBILE */
@@ -74,41 +91,749 @@ nav a:hover{color:var(--accent)}
 /* SECTIONS */
 section{padding:100px 60px}
 h1,h2{text-align:center}
-h2{font-size:2.2rem;margin-bottom:25px}
+h2{font-size:2.2rem;margin-bottom:25px; position: relative; display: inline-block;}
+h2:after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  bottom: -10px;
+  left: 25%;
+  background-color: var(--accent);
+}
 p{text-align:center;color:var(--muted)}
 
 /* HERO */
-.hero{padding-top:160px}
-.hero h1{font-size:3rem}
+.hero{padding-top:160px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;}
+.hero h1{font-size:3rem; margin-bottom: 20px;}
 .hero span{color:var(--accent)}
-.btn{
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.btn-secondary {
   display:inline-block;
-  margin-top:30px;
-  background:var(--accent);
-  color:#fff;
+  background:transparent;
+  color:var(--accent);
   padding:14px 36px;
   border-radius:40px;
   text-decoration:none;
   font-weight:600;
+  border: 2px solid var(--accent);
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* STATS SECTION */
+.stats-section {
+  background: var(--light-bg);
+  padding: 80px 60px;
+}
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.stat-item {
+  text-align: center;
+  min-width: 200px;
+}
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+.stat-label {
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* FEATURED WORKS SECTION */
+.featured-works {
+  padding: 80px 60px;
+}
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.featured-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.featured-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+.featured-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.featured-item:hover img {
+  transform: scale(1.1);
+}
+.featured-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  padding: 30px 20px 20px;
+  color: white;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.featured-item:hover .featured-overlay {
+  transform: translateY(0);
+}
+.featured-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.featured-category {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.featured-description {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* Image Ticker Animation */
+.ticker-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+  background: var(--light-bg);
+}
+.ticker-content {
+  display: flex;
+  animation: ticker 15s linear infinite;
+}
+.ticker-item {
+  flex: 0 0 auto;
+  width: 300px;
+  height: 200px;
+  margin: 0 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.ticker-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.ticker-item:hover img {
+  transform: scale(1.1);
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:30px;
   margin-top:40px;
 }
 .card{
   background:var(--card);
-  padding:20px;
+  padding:25px;
   border-radius:16px;
   box-shadow:0 10px 30px rgba(0,0,0,.08);
   text-align:center;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+.card-icon {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 15px;
 }
 .card img{
   width:100%;
+  height:250px;
+  object-fit:cover;
   border-radius:12px;
+  transition: transform 0.5s ease;
+}
+.card:hover img {
+  transform: scale(1.1);
+}
+
+/* Portfolio specific styles */
+.portfolio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+.portfolio-filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 8px 20px;
+  margin: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+.portfolio-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.portfolio-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+.portfolio-title {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.portfolio-category {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+.view-project {
+  margin-top: 15px;
+  background: var(--accent);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+.view-project:hover {
+  background: white;
+  color: var(--accent);
+}
+
+/* TESTIMONIALS SECTION */
+.testimonials {
+  background: var(--light-bg);
+  padding: 80px 60px;
+}
+.testimonial-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.testimonial-item {
+  display: none;
+  padding: 30px;
+}
+.testimonial-item.active {
+  display: block;
+}
+.testimonial-text {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.testimonial-author {
+  font-weight: 600;
+  color: var(--accent);
+}
+.testimonial-position {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ddd;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.dot.active {
+  background: var(--accent);
+}
+
+/* REVIEWS SECTION */
+.reviews-section {
+  background: var(--light-bg);
+  padding: 80px 60px;
+}
+.reviews-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.review-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+.review-card:hover {
+  transform: translateY(-5px);
+}
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.review-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 15px;
+}
+.review-info h4 {
+  margin: 0;
+  color: var(--text);
+}
+.review-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.review-rating {
+  color: #ffc107;
+  margin-bottom: 10px;
+}
+.review-text {
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* IMPROVED CONTACT SECTION */
+#contact {
+  background: var(--light-bg);
+  position: relative;
+  padding: 100px 60px;
+}
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.contact-left {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.contact-right {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.contact-title {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: var(--nav);
+  position: relative;
+}
+.contact-title:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  bottom: -10px;
+  left: 0;
+}
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: var(--light-bg);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.contact-info-item:hover {
+  transform: translateX(5px);
+  background: #e9ecef;
+}
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  color: white;
+  font-size: 1.2rem;
+}
+.contact-details h4 {
+  margin: 0 0 5px 0;
+  color: var(--text);
+}
+.contact-details p {
+  margin: 0;
+  color: var(--muted);
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text);
+}
+input, textarea, select {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,187,212,0.1);
+}
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.submit-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  width: 100%;
+}
+.submit-btn:hover {
+  background: #00a8c0;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,187,212,0.3);
+}
+
+/* Modal for portfolio items */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  z-index: 2000;
+  overflow: auto;
+}
+.modal-content {
+  background-color: var(--card);
+  margin: 5% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 16px;
+  position: relative;
+  animation: modalopen 0.5s;
+}
+@keyframes modalopen {
+  from {opacity: 0; transform: translateY(-50px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: var(--text);
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal-image {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+.modal-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+.modal-description {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.modal-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.detail-item {
+  background: var(--bg);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* ADMIN PAGE */
+.admin-page {
+  display: none;
+  min-height: 100vh;
+  background: var(--light-bg);
+}
+.admin-header {
+  background: var(--nav);
+  color: white;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.admin-title {
+  font-size: 1.8rem;
+}
+.admin-nav {
+  display: flex;
+  gap: 20px;
+}
+.admin-nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+.admin-nav a:hover {
+  background: rgba(255,255,255,0.1);
+}
+.admin-content {
+  padding: 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.admin-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.admin-section h2 {
+  text-align: left;
+  margin-bottom: 20px;
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.admin-table th, .admin-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.admin-table th {
+  background: var(--light-bg);
+  font-weight: 600;
+}
+.admin-actions {
+  display: flex;
+  gap: 10px;
+}
+.btn-edit, .btn-delete {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-edit {
+  background: var(--accent);
+  color: white;
+}
+.btn-delete {
+  background: var(--danger);
+  color: white;
+}
+.btn-edit:hover, .btn-delete:hover {
+  opacity: 0.8;
+}
+
+/* VIEWERS PAGE */
+.viewers-page {
+  display: none;
+  min-height: 100vh;
+  background: var(--light-bg);
+}
+.viewers-header {
+  background: var(--nav);
+  color: white;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.viewers-content {
+  padding: 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.review-form {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.rating-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.star {
+  font-size: 24px;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.star.active {
+  color: #ffc107;
+}
+
+/* LOGIN PAGE */
+.login-page {
+  display: none;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--nav) 0%, var(--accent) 100%);
+  justify-content: center;
+  align-items: center;
+}
+.login-container {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+}
+.login-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--nav);
+}
+.login-form input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+.login-btn {
+  width: 100%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.login-btn:hover {
+  background: #00a8c0;
+}
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.login-options a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
 /* FOOTER */
@@ -130,99 +855,1141 @@ footer{
   border-radius:50%;
   font-size:22px;
   text-decoration:none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* Loading animation */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--nav);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
+.loader-content {
+  text-align: center;
+}
+.loader-logo {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.loader-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.loader-progress {
+  height: 100%;
+  background: var(--accent);
+  width: 0;
+  animation: loading 2s ease-in-out forwards;
+}
+@keyframes loading {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* BUTTON STYLES */
+.btn{
+  display:inline-block;
+  margin-top:30px;
+  background:var(--accent);
+  color:#fff;
+  padding:14px 36px;
+  border-radius:40px;
+  text-decoration:none;
+  font-weight:600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,187,212,0.3);
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,187,212,0.4);
+}
+
+/* PAGE LINKS IN FOOTER */
+.page-links {
+  margin-top: 10px;
+}
+.page-links a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.page-links a:hover {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media(max-width: 992px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOADING SCREEN -->
+<div class="loader" id="loader">
+  <div class="loader-content">
+    <div class="loader-logo">CreativeAgency</div>
+    <div class="loader-bar">
+      <div class="loader-progress"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN WEBSITE -->
+<div id="mainWebsite">
 <header>
   <div class="logo">CreativeAgency</div>
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
   <nav id="nav">
     <a href="#home">Home</a>
     <a href="#services">Services</a>
+    <a href="#featured">Featured</a>
     <a href="#portfolio">Portfolio</a>
+    <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
-    <button id="themeToggle">🌙</button>
   </nav>
 </header>
 
 <section class="hero" id="home">
-  <h1>Creative <span>Design</span> Portfolio</h1>
-  <p>We design brands, websites and digital experiences.</p>
-  <a href="#portfolio" class="btn">View Work</a>
+  <h1 data-aos="fade-up">Creative <span>Design</span> Portfolio</h1>
+  <p data-aos="fade-up" data-aos-delay="100">We design brands, websites and digital experiences that inspire and engage.</p>
+  <div class="hero-buttons" data-aos="fade-up" data-aos-delay="200">
+    <a href="#portfolio" class="btn">View Portfolio</a>
+    <a href="#contact" class="btn-secondary">Get In Touch</a>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="stats-section" id="stats">
+  <div class="stats-container">
+    <div class="stat-item" data-aos="fade-up">
+      <span class="stat-number" data-target="150">0</span>
+      <span class="stat-label">Projects Completed</span>
+    </div>
+    <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+      <span class="stat-number" data-target="98">0</span>
+      <span class="stat-label">Happy Clients</span>
+    </div>
+    <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+      <span class="stat-number" data-target="12">0</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+      <span class="stat-number" data-target="15">0</span>
+      <span class="stat-label">Team Members</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED WORKS SECTION -->
+<section class="featured-works" id="featured">
+  <h2 data-aos="fade-up">Featured Works</h2>
+  <div class="featured-grid" id="featuredGrid">
+    <!-- Featured works will be dynamically loaded here -->
+  </div>
 </section>
 
 <section id="services">
-  <h2>Services</h2>
+  <h2 data-aos="fade-up">Our Services</h2>
   <div class="grid">
-    <div class="card">Logo & Branding</div>
-    <div class="card">Poster & Flyer Design</div>
-    <div class="card">Web Design</div>
-    <div class="card">Social Media Design</div>
+    <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fas fa-palette"></i></div>
+      <h3>Logo & Branding</h3>
+      <p>Creating unique brand identities that leave a lasting impression and set you apart from the competition.</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-print"></i></div>
+      <h3>Poster & Flyer Design</h3>
+      <p>Eye-catching marketing materials that grab attention and communicate your message effectively.</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+      <h3>Web Design</h3>
+      <p>Beautiful, responsive websites that deliver results and provide exceptional user experiences.</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h3>Social Media Design</h3>
+      <p>Engaging visuals for your social media platforms that increase engagement and brand awareness.</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="500">
+      <div class="card-icon"><i class="fas fa-video"></i></div>
+      <h3>Motion Graphics</h3>
+      <p>Dynamic animations and video content that bring your brand to life and captivate your audience.</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="600">
+      <div class="card-icon"><i class="fas fa-camera"></i></div>
+      <h3>Photography</h3>
+      <p>Professional photography services that showcase your products and brand in the best light.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTINUOUS IMAGE ANIMATION SECTION -->
+<section>
+  <h2 data-aos="fade-up">Recent Works</h2>
+  <div class="ticker-container" data-aos="fade-up" data-aos-delay="100">
+    <div class="ticker-content">
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker1/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker2/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker3/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker4/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker5/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker6/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker7/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker8/300/200.jpg" alt="Recent Work"></div>
+      <!-- Duplicate the images for seamless loop -->
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker1/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker2/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker3/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker4/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker5/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker6/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker7/300/200.jpg" alt="Recent Work"></div>
+      <div class="ticker-item"><img src="https://picsum.photos/seed/ticker8/300/200.jpg" alt="Recent Work"></div>
+    </div>
   </div>
 </section>
 
 <section id="portfolio">
-  <h2>Portfolio</h2>
-  <div class="grid">
-    <div class="card">
-      <img src="image/b1.jpg" alt="Brochure Design">
-      <p>Brochure Design</p>
-    </div>
-    <div class="card">
-      <img src="image/b2.png" alt="Creative Artwork">
-      <p>Creative Artwork</p>
-    </div>
-    <div class="card">
-      <img src="image/b3.jpg" alt="Branding">
-      <p>Branding</p>
-    </div>
-    <div class="card">
-      <img src="image/image/Website-Mockup.png" alt="Website Design">
-      <p>Website Design</p>
+  <h2 data-aos="fade-up">Portfolio</h2>
+  
+  <div class="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="branding">Branding</button>
+    <button class="filter-btn" data-filter="web">Web Design</button>
+    <button class="filter-btn" data-filter="print">Print</button>
+    <button class="filter-btn" data-filter="social">Social Media</button>
+  </div>
+  
+  <div class="grid" id="portfolio-grid">
+    <!-- Portfolio items will be dynamically loaded here -->
+  </div>
+</section>
+
+<!-- REVIEWS SECTION -->
+<section class="reviews-section" id="reviews">
+  <h2 data-aos="fade-up">Client Reviews</h2>
+  <div class="reviews-container">
+    <div class="reviews-grid" id="reviewsGrid">
+      <!-- Reviews will be dynamically loaded here -->
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <div class="grid">
-    <div class="card">
-      <p>📧 hello@creativeagency.com</p>
-      <p>📞 +91 90000 00000</p>
-      <p>📍 Kerala, India</p>
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials" id="testimonials">
+  <h2 data-aos="fade-up">What Clients Say</h2>
+  <div class="testimonial-container">
+    <div class="testimonial-item active" data-aos="fade-up">
+      <p class="testimonial-text">"Working with CreativeAgency was an absolute pleasure. They understood our vision perfectly and delivered a brand identity that exceeded our expectations. Highly recommended!"</p>
+      <p class="testimonial-author">Sarah Johnson</p>
+      <p class="testimonial-position">CEO, TechStart</p>
     </div>
-    <form class="card">
-      <input type="text" placeholder="Name" required><br><br>
-      <input type="email" placeholder="Email" required><br><br>
-      <textarea rows="4" placeholder="Message"></textarea><br><br>
-      <button class="btn" type="submit">Send Message</button>
-    </form>
+    <div class="testimonial-item">
+      <p class="testimonial-text">"The website design created by CreativeAgency has transformed our online presence. Our conversion rates have increased by 40% since launch. Exceptional work!"</p>
+      <p class="testimonial-author">Michael Chen</p>
+      <p class="testimonial-position">Marketing Director, RetailHub</p>
+    </div>
+    <div class="testimonial-item">
+      <p class="testimonial-text">"CreativeAgency brought our social media to life with stunning visuals that perfectly capture our brand essence. Our engagement has never been higher!"</p>
+      <p class="testimonial-author">Emily Rodriguez</p>
+      <p class="testimonial-position">Founder, BeautyBrand</p>
+    </div>
+    <div class="testimonial-dots">
+      <span class="dot active" onclick="showTestimonial(0)"></span>
+      <span class="dot" onclick="showTestimonial(1)"></span>
+      <span class="dot" onclick="showTestimonial(2)"></span>
+    </div>
+  </div>
+</section>
+
+<!-- IMPROVED CONTACT SECTION -->
+<section id="contact">
+  <div class="contact-container">
+    <div class="contact-left" data-aos="fade-right">
+      <h2 class="contact-title">Get In Touch</h2>
+      <p style="margin-bottom: 30px; color: var(--muted);">Have a project in mind? Let's create something amazing together!</p>
+      
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div class="contact-details">
+          <h4>Email Us</h4>
+          <p>hello@creativeagency.com</p>
+        </div>
+      </div>
+      
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <div class="contact-details">
+          <h4>Call Us</h4>
+          <p>+91 90000 00000</p>
+        </div>
+      </div>
+      
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="contact-details">
+          <h4>Visit Us</h4>
+          <p>Kerala, India</p>
+        </div>
+      </div>
+      
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+        <div class="contact-details">
+          <h4>Business Hours</h4>
+          <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="contact-right" data-aos="fade-left">
+      <h2 class="contact-title">Send Us a Message</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" placeholder="Project Inquiry" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us about your project..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
   </div>
 </section>
 
 <footer>
   © 2025 CreativeAgency. All rights reserved.
+  <div class="page-links">
+    <a href="#" onclick="showLogin(event)">Admin</a>
+    <a href="#" onclick="showViewersPage(event)">Viewers</a>
+  </div>
 </footer>
 
-<a href="https://wa.me/919000000000" class="whatsapp" target="_blank">💬</a>
+<a href="https://wa.me/919000000000" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<!-- MODAL FOR PORTFOLIO ITEMS -->
+<div id="portfolioModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <img class="modal-image" src="" alt="">
+    <h2 class="modal-title"></h2>
+    <p class="modal-description"></p>
+    <div class="modal-details">
+      <div class="detail-item">Client: <span id="modal-client"></span></div>
+      <div class="detail-item">Date: <span id="modal-date"></span></div>
+      <div class="detail-item">Category: <span id="modal-category"></span></div>
+    </div>
+    <a href="#" class="btn">Visit Website</a>
+  </div>
+</div>
+</div>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-page">
+  <div class="login-container">
+    <h2 class="login-title">Admin Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <input type="email" id="adminEmail" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="adminPassword" placeholder="Password" required>
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <div class="login-options">
+      <a href="#" onclick="showMainWebsite(event)">Back to Website</a>
+      <a href="#" onclick="showViewersPage(event)">Viewers Page</a>
+    </div>
+    <p id="loginError" style="color: red; margin-top: 15px; text-align: center; display: none;">Invalid email or password</p>
+  </div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div id="adminPage" class="admin-page">
+  <header class="admin-header">
+    <div class="admin-title">Admin Dashboard</div>
+    <nav class="admin-nav">
+      <a href="#" onclick="showMainWebsite(event)">Website</a>
+      <a href="#" onclick="showViewersPage(event)">Viewers</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+  
+  <div class="admin-content">
+    <div class="admin-section">
+      <h2>Portfolio Management</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Client</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="portfolioTable">
+          <!-- Portfolio items will be loaded here -->
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="admin-section">
+      <h2>Featured Works Management</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="featuredTable">
+          <!-- Featured items will be loaded here -->
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="admin-section">
+      <h2>Reviews Management</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="reviewsTable">
+          <!-- Reviews will be loaded here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- VIEWERS PAGE -->
+<div id="viewersPage" class="viewers-page">
+  <header class="viewers-header">
+    <div class="admin-title">Viewers Portal</div>
+    <nav class="admin-nav">
+      <a href="#" onclick="showMainWebsite(event)">Website</a>
+      <a href="#" onclick="showLogin(event)">Admin</a>
+    </nav>
+  </header>
+  
+  <div class="viewers-content">
+    <div class="review-form">
+      <h2>Write a Review</h2>
+      <form id="reviewForm">
+        <div class="form-group">
+          <label for="reviewerName">Your Name</label>
+          <input type="text" id="reviewerName" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="reviewerEmail">Email Address</label>
+          <input type="email" id="reviewerEmail" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Rating</label>
+          <div class="rating-input">
+            <span class="star" data-rating="1">★</span>
+            <span class="star" data-rating="2">★</span>
+            <span class="star" data-rating="3">★</span>
+            <span class="star" data-rating="4">★</span>
+            <span class="star" data-rating="5">★</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="reviewText">Your Review</label>
+          <textarea id="reviewText" placeholder="Share your experience with us..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit Review</button>
+      </form>
+    </div>
+    
+    <div class="admin-section">
+      <h2>All Reviews</h2>
+      <div class="reviews-grid" id="allReviewsGrid">
+        <!-- All reviews will be loaded here -->
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- 🔥 FIREBASE MODULES -->
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/auth.js"></script>
 <script type="module" src="js/blog.js"></script>
 
+<!-- AOS ANIMATION LIBRARY -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 <script>
+// Initialize AOS
+AOS.init({
+  duration: 800,
+  once: true
+});
+
+// Hide loader when page is fully loaded
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    const loader = document.getElementById('loader');
+    loader.style.opacity = '0';
+    setTimeout(function() {
+      loader.style.display = 'none';
+    }, 500);
+  }, 1500);
+});
+
+// Page navigation functions
+function showMainWebsite(event) {
+  if (event) event.preventDefault();
+  document.getElementById('mainWebsite').style.display = 'block';
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('adminPage').style.display = 'none';
+  document.getElementById('viewersPage').style.display = 'none';
+}
+
+function showLogin(event) {
+  if (event) event.preventDefault();
+  document.getElementById('mainWebsite').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'flex';
+  document.getElementById('adminPage').style.display = 'none';
+  document.getElementById('viewersPage').style.display = 'none';
+}
+
+function showAdminPage() {
+  document.getElementById('mainWebsite').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('adminPage').style.display = 'block';
+  document.getElementById('viewersPage').style.display = 'none';
+  loadAdminTables();
+}
+
+function showViewersPage(event) {
+  if (event) event.preventDefault();
+  document.getElementById('mainWebsite').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('adminPage').style.display = 'none';
+  document.getElementById('viewersPage').style.display = 'block';
+  loadAllReviews();
+}
+
+function logout() {
+  showMainWebsite();
+}
+
+// Toggle mobile menu
 function toggleMenu(){
   document.getElementById("nav").classList.toggle("show");
 }
-const t=document.getElementById("themeToggle");
-t.onclick=()=>{
-  document.body.classList.toggle("dark");
-  t.textContent=document.body.classList.contains("dark")?"☀️":"🌙";
+
+// Testimonial slider
+function showTestimonial(index) {
+  const testimonials = document.querySelectorAll('.testimonial-item');
+  const dots = document.querySelectorAll('.dot');
+  
+  testimonials.forEach(item => item.classList.remove('active'));
+  dots.forEach(dot => dot.classList.remove('active'));
+  
+  testimonials[index].classList.add('active');
+  dots[index].classList.add('active');
 }
+
+// Auto-rotate testimonials
+let currentTestimonial = 0;
+setInterval(() => {
+  currentTestimonial = (currentTestimonial + 1) % 3;
+  showTestimonial(currentTestimonial);
+}, 5000);
+
+// Animated counter for stats
+function animateCounter() {
+  const counters = document.querySelectorAll('.stat-number');
+  const speed = 200;
+  
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    const increment = target / speed;
+    
+    const updateCount = () => {
+      const count = +counter.innerText;
+      
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 1);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    
+    updateCount();
+  });
+}
+
+// Trigger counter animation when stats section is in view
+const statsSection = document.getElementById('stats');
+const statsObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    animateCounter();
+    statsObserver.unobserve(statsSection);
+  }
+}, { threshold: 0.5 });
+
+statsObserver.observe(statsSection);
+
+// Portfolio filtering
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Remove active class from all buttons
+    filterBtns.forEach(btn => btn.classList.remove('active'));
+    // Add active class to clicked button
+    btn.classList.add('active');
+    
+    const filter = btn.getAttribute('data-filter');
+    const portfolioItems = document.querySelectorAll('#portfolio-grid .card');
+    
+    portfolioItems.forEach(item => {
+      if (filter === 'all' || item.getAttribute('data-category') === filter) {
+        item.style.display = 'block';
+        // Re-initialize AOS for filtered items
+        AOS.refresh();
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Modal functionality
+const modal = document.getElementById('portfolioModal');
+const modalImg = document.querySelector('.modal-image');
+const modalTitle = document.querySelector('.modal-title');
+const modalDesc = document.querySelector('.modal-description');
+const modalClient = document.getElementById('modal-client');
+const modalDate = document.getElementById('modal-date');
+const modalCategory = document.getElementById('modal-category');
+const closeModal = document.querySelector('.close-modal');
+
+// Portfolio data - will be loaded from Firebase
+let portfolioData = {};
+let featuredData = {};
+let reviewsData = {};
+
+// Open modal with portfolio data
+function openPortfolioModal(id) {
+  const data = portfolioData[id];
+  
+  modalImg.src = data.image;
+  modalTitle.textContent = data.title;
+  modalDesc.textContent = data.description;
+  modalClient.textContent = data.client;
+  modalDate.textContent = data.date;
+  modalCategory.textContent = data.category;
+  
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+// Close modal
+closeModal.addEventListener('click', () => {
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+});
+
+// Close modal when clicking outside of it
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+});
+
+// Form submission
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  // Create a success message
+  const successMessage = document.createElement('div');
+  successMessage.style.position = 'fixed';
+  successMessage.style.top = '50%';
+  successMessage.style.left = '50%';
+  successMessage.style.transform = 'translate(-50%, -50%)';
+  successMessage.style.background = 'var(--success)';
+  successMessage.style.color = 'white';
+  successMessage.style.padding = '20px 40px';
+  successMessage.style.borderRadius = '8px';
+  successMessage.style.zIndex = '9999';
+  successMessage.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+  successMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+  
+  document.body.appendChild(successMessage);
+  
+  // Reset form
+  e.target.reset();
+  
+  // Remove success message after 3 seconds
+  setTimeout(() => {
+    successMessage.style.opacity = '0';
+    successMessage.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => {
+      document.body.removeChild(successMessage);
+    }, 500);
+  }, 3000);
+});
+
+// Admin login form
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const email = document.getElementById('adminEmail').value;
+  const password = document.getElementById('adminPassword').value;
+  
+  // Simple authentication
+  if (email === 'admin@creativeagency.com' && password === 'admin123') {
+    showAdminPage();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+});
+
+// Review form submission
+document.getElementById('reviewForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const name = document.getElementById('reviewerName').value;
+  const email = document.getElementById('reviewerEmail').value;
+  const rating = document.querySelectorAll('.star.active').length;
+  const text = document.getElementById('reviewText').value;
+  
+  // Create a new review
+  const newReview = {
+    name,
+    email,
+    rating,
+    text,
+    date: new Date().toLocaleDateString()
+  };
+  
+  // Add to reviews data
+  const id = Date.now().toString();
+  reviewsData[id] = newReview;
+  
+  // Reset form
+  e.target.reset();
+  document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+  
+  // Show success message
+  const successMessage = document.createElement('div');
+  successMessage.style.position = 'fixed';
+  successMessage.style.top = '50%';
+  successMessage.style.left = '50%';
+  successMessage.style.transform = 'translate(-50%, -50%)';
+  successMessage.style.background = 'var(--success)';
+  successMessage.style.color = 'white';
+  successMessage.style.padding = '20px 40px';
+  successMessage.style.borderRadius = '8px';
+  successMessage.style.zIndex = '9999';
+  successMessage.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+  successMessage.textContent = 'Thank you for your review!';
+  
+  document.body.appendChild(successMessage);
+  
+  // Remove success message after 3 seconds
+  setTimeout(() => {
+    successMessage.style.opacity = '0';
+    successMessage.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => {
+      document.body.removeChild(successMessage);
+    }, 500);
+  }, 3000);
+  
+  // Reload reviews
+  loadReviews();
+  loadAllReviews();
+});
+
+// Star rating functionality
+document.querySelectorAll('.star').forEach(star => {
+  star.addEventListener('click', function() {
+    const rating = parseInt(this.getAttribute('data-rating'));
+    document.querySelectorAll('.star').forEach((s, index) => {
+      if (index < rating) {
+        s.classList.add('active');
+      } else {
+        s.classList.remove('active');
+      }
+    });
+  });
+});
+
+// Load portfolio items
+function loadPortfolioItems() {
+  const portfolioGrid = document.getElementById('portfolio-grid');
+  
+  // Clear existing items
+  portfolioGrid.innerHTML = '';
+  
+  // Add items from data
+  Object.keys(portfolioData).forEach((id, index) => {
+    const item = portfolioData[id];
+    
+    // Add to main portfolio grid
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.setAttribute('data-aos', 'zoom-in');
+    card.setAttribute('data-aos-delay', (index + 1) * 100);
+    card.setAttribute('data-category', item.category);
+    
+    card.innerHTML = `
+      <div class="portfolio-item">
+        <img src="${item.image}" alt="${item.title}">
+        <div class="portfolio-overlay">
+          <div class="portfolio-title">${item.title}</div>
+          <div class="portfolio-category">${item.category}</div>
+          <a href="#" class="view-project" onclick="openPortfolioModal('${id}'); return false;">View Project</a>
+        </div>
+      </div>
+    `;
+    
+    portfolioGrid.appendChild(card);
+  });
+  
+  // Reinitialize AOS
+  AOS.refresh();
+}
+
+// Load featured items
+function loadFeaturedItems() {
+  const featuredGrid = document.getElementById('featuredGrid');
+  
+  // Clear existing items
+  featuredGrid.innerHTML = '';
+  
+  // Add items from data
+  Object.keys(featuredData).forEach((id, index) => {
+    const item = featuredData[id];
+    
+    // Add to main featured grid
+    const featuredItem = document.createElement('div');
+    featuredItem.className = 'featured-item';
+    featuredItem.setAttribute('data-aos', 'fade-up');
+    featuredItem.setAttribute('data-aos-delay', (index + 1) * 100);
+    
+    featuredItem.innerHTML = `
+      <img src="${item.image}" alt="${item.title}">
+      <div class="featured-overlay">
+        <div class="featured-title">${item.title}</div>
+        <div class="featured-category">${item.category}</div>
+        <div class="featured-description">${item.description}</div>
+      </div>
+    `;
+    
+    featuredGrid.appendChild(featuredItem);
+  });
+  
+  // Reinitialize AOS
+  AOS.refresh();
+}
+
+// Load reviews
+function loadReviews() {
+  const reviewsGrid = document.getElementById('reviewsGrid');
+  
+  // Clear existing items
+  reviewsGrid.innerHTML = '';
+  
+  // Add items from data (show only 6 latest reviews)
+  const reviewKeys = Object.keys(reviewsData).slice(-6);
+  
+  reviewKeys.forEach(id => {
+    const review = reviewsData[id];
+    
+    const reviewCard = document.createElement('div');
+    reviewCard.className = 'review-card';
+    reviewCard.setAttribute('data-aos', 'fade-up');
+    
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+      stars += `<span class="${i <= review.rating ? 'active' : ''}">★</span>`;
+    }
+    
+    reviewCard.innerHTML = `
+      <div class="review-header">
+        <div class="review-avatar">${review.name.charAt(0).toUpperCase()}</div>
+        <div class="review-info">
+          <h4>${review.name}</h4>
+          <div class="review-date">${review.date}</div>
+        </div>
+      </div>
+      <div class="review-rating">${stars}</div>
+      <div class="review-text">${review.text}</div>
+    `;
+    
+    reviewsGrid.appendChild(reviewCard);
+  });
+  
+  // Reinitialize AOS
+  AOS.refresh();
+}
+
+// Load all reviews for viewers page
+function loadAllReviews() {
+  const allReviewsGrid = document.getElementById('allReviewsGrid');
+  
+  // Clear existing items
+  allReviewsGrid.innerHTML = '';
+  
+  // Add all items from data
+  Object.keys(reviewsData).forEach(id => {
+    const review = reviewsData[id];
+    
+    const reviewCard = document.createElement('div');
+    reviewCard.className = 'review-card';
+    
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+      stars += `<span class="${i <= review.rating ? 'active' : ''}">★</span>`;
+    }
+    
+    reviewCard.innerHTML = `
+      <div class="review-header">
+        <div class="review-avatar">${review.name.charAt(0).toUpperCase()}</div>
+        <div class="review-info">
+          <h4>${review.name}</h4>
+          <div class="review-date">${review.date}</div>
+        </div>
+      </div>
+      <div class="review-rating">${stars}</div>
+      <div class="review-text">${review.text}</div>
+    `;
+    
+    allReviewsGrid.appendChild(reviewCard);
+  });
+}
+
+// Load admin tables
+function loadAdminTables() {
+  // Load portfolio table
+  const portfolioTable = document.getElementById('portfolioTable');
+  portfolioTable.innerHTML = '';
+  
+  Object.keys(portfolioData).forEach(id => {
+    const item = portfolioData[id];
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${id}</td>
+      <td>${item.title}</td>
+      <td>${item.category}</td>
+      <td>${item.client}</td>
+      <td>
+        <div class="admin-actions">
+          <button class="btn-edit">Edit</button>
+          <button class="btn-delete" onclick="deletePortfolioItem('${id}')">Delete</button>
+        </div>
+      </td>
+    `;
+    portfolioTable.appendChild(row);
+  });
+  
+  // Load featured table
+  const featuredTable = document.getElementById('featuredTable');
+  featuredTable.innerHTML = '';
+  
+  Object.keys(featuredData).forEach(id => {
+    const item = featuredData[id];
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${id}</td>
+      <td>${item.title}</td>
+      <td>${item.category}</td>
+      <td>
+        <div class="admin-actions">
+          <button class="btn-edit">Edit</button>
+          <button class="btn-delete" onclick="deleteFeaturedItem('${id}')">Delete</button>
+        </div>
+      </td>
+    `;
+    featuredTable.appendChild(row);
+  });
+  
+  // Load reviews table
+  const reviewsTable = document.getElementById('reviewsTable');
+  reviewsTable.innerHTML = '';
+  
+  Object.keys(reviewsData).forEach(id => {
+    const review = reviewsData[id];
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${id}</td>
+      <td>${review.name}</td>
+      <td>${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</td>
+      <td>${review.date}</td>
+      <td>
+        <div class="admin-actions">
+          <button class="btn-delete" onclick="deleteReview('${id}')">Delete</button>
+        </div>
+      </td>
+    `;
+    reviewsTable.appendChild(row);
+  });
+}
+
+// Delete functions
+function deletePortfolioItem(id) {
+  if (confirm('Are you sure you want to delete this portfolio item?')) {
+    delete portfolioData[id];
+    loadPortfolioItems();
+    loadAdminTables();
+  }
+}
+
+function deleteFeaturedItem(id) {
+  if (confirm('Are you sure you want to delete this featured work?')) {
+    delete featuredData[id];
+    loadFeaturedItems();
+    loadAdminTables();
+  }
+}
+
+function deleteReview(id) {
+  if (confirm('Are you sure you want to delete this review?')) {
+    delete reviewsData[id];
+    loadReviews();
+    loadAllReviews();
+    loadAdminTables();
+  }
+}
+
+// Initialize with sample data
+portfolioData = {
+  '1': {
+    title: 'Brand Identity',
+    category: 'branding',
+    description: 'Complete brand identity design including logo, color palette, typography, and brand guidelines for a tech startup looking to establish a strong market presence.',
+    client: 'TechVentures Inc.',
+    date: 'January 2023',
+    image: 'https://picsum.photos/seed/branding1/400/300.jpg'
+  },
+  '2': {
+    title: 'Website Design',
+    category: 'web',
+    description: 'Modern, responsive website design for a luxury hotel chain, focusing on user experience and conversion optimization.',
+    client: 'Grand Hotels',
+    date: 'February 2023',
+    image: 'https://picsum.photos/seed/web1/400/300.jpg'
+  },
+  '3': {
+    title: 'Brochure Design',
+    category: 'print',
+    description: 'Elegant tri-fold brochure design for a high-end real estate development, showcasing property features with compelling visuals.',
+    client: 'Luxury Properties',
+    date: 'March 2023',
+    image: 'https://picsum.photos/seed/print1/400/300.jpg'
+  },
+  '4': {
+    title: 'Social Media Campaign',
+    category: 'social',
+    description: 'Comprehensive social media campaign including graphics, templates, and brand guidelines for a new product launch.',
+    client: 'BeautyBrand',
+    date: 'April 2023',
+    image: 'https://picsum.photos/seed/social1/400/300.jpg'
+  }
+};
+
+featuredData = {
+  '1': {
+    title: 'Logo Design',
+    category: 'branding',
+    description: 'Minimalist logo design for a sustainable fashion brand, incorporating eco-friendly elements.',
+    image: 'https://picsum.photos/seed/featured1/400/300.jpg'
+  },
+  '2': {
+    title: 'Mobile App UI',
+    category: 'web',
+    description: 'User-friendly mobile app interface design for a food delivery service.',
+    image: 'https://picsum.photos/seed/featured2/400/300.jpg'
+  },
+  '3': {
+    title: 'Event Poster',
+    category: 'print',
+    description: 'Eye-catching poster design for a music festival with vibrant colors and dynamic typography.',
+    image: 'https://picsum.photos/seed/featured3/400/300.jpg'
+  }
+};
+
+reviewsData = {
+  '1': {
+    name: 'John Smith',
+    email: 'john@example.com',
+    rating: 5,
+    text: 'Excellent work! The team delivered exactly what we needed and exceeded our expectations.',
+    date: '01/15/2023'
+  },
+  '2': {
+    name: 'Sarah Johnson',
+    email: 'sarah@example.com',
+    rating: 4,
+    text: 'Great experience working with CreativeAgency. Professional and creative team.',
+    date: '01/10/2023'
+  },
+  '3': {
+    name: 'Michael Brown',
+    email: 'michael@example.com',
+    rating: 5,
+    text: 'Outstanding design work! Our new brand identity has received so many compliments.',
+    date: '01/05/2023'
+  }
+};
+
+// Load initial data
+loadPortfolioItems();
+loadFeaturedItems();
+loadReviews();
 </script>
 
 </body>
