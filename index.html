@@ -11,7 +11,7 @@
 <meta name="keywords" content="graphic design, branding, web design, portfolio">
 <meta name="author" content="CreativeAgency">
 
-<!-- GOOGLE FONT -->
+<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -101,7 +101,7 @@ p{text-align:center;color:var(--muted)}
 }
 .card{
   background:var(--card);
-  padding:25px;
+  padding:20px;
   border-radius:16px;
   box-shadow:0 10px 30px rgba(0,0,0,.08);
   text-align:center;
@@ -109,7 +109,6 @@ p{text-align:center;color:var(--muted)}
 .card img{
   width:100%;
   border-radius:12px;
-  margin-bottom:12px;
 }
 
 /* FOOTER */
@@ -144,74 +143,49 @@ footer{
     <a href="#home">Home</a>
     <a href="#services">Services</a>
     <a href="#portfolio">Portfolio</a>
-    <a href="#blog">Blog</a>
     <a href="#contact">Contact</a>
     <button id="themeToggle">🌙</button>
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <h1>Creative <span>Design</span> Portfolio</h1>
   <p>We design brands, websites and digital experiences.</p>
   <a href="#portfolio" class="btn">View Work</a>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <h2>Services</h2>
   <div class="grid">
-    <div class="card">
-      <img src="image/l1.png" alt="Branding">
-      <p>Logo & Branding</p>
-    </div>
-    <div class="card">
-      <img src="image/b1.jpg" alt="Brochure">
-      <p>Poster & Flyer Design</p>
-    </div>
-    <div class="card">
-      <img src="image/.png" alt="Web Design">
-      <p>Web Design</p>
-    </div>
-    <div class="card">
-      <img src="image/p1.jpg" alt="Social Media">
-      <p>Social Media Design</p>
-    </div>
+    <div class="card">Logo & Branding</div>
+    <div class="card">Poster & Flyer Design</div>
+    <div class="card">Web Design</div>
+    <div class="card">Social Media Design</div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section id="portfolio">
   <h2>Portfolio</h2>
   <div class="grid">
     <div class="card">
-      <img src="image/website-mockup.png">
-      <p>Website Project</p>
-    </div>
-    <div class="card">
-      <img src="image/b1.jpg">
+      <img src="image/b1.jpg" alt="Brochure Design">
       <p>Brochure Design</p>
     </div>
     <div class="card">
-      <img src="image/b3.jpg">
-      <p>Brand Identity</p>
+      <img src="image/b2.png" alt="Creative Artwork">
+      <p>Creative Artwork</p>
     </div>
     <div class="card">
-      <img src="image/social-media.jpg">
-      <p>Social Media Campaign</p>
+      <img src="image/b3.jpg" alt="Branding">
+      <p>Branding</p>
+    </div>
+    <div class="card">
+      <img src="image/Website-Mockup.png" alt="Website Design">
+      <p>Website Design</p>
     </div>
   </div>
 </section>
 
-<!-- BLOG -->
-<section id="blog">
-  <h2>Latest Blog</h2>
-  <div class="grid" id="blogPosts">
-    <div class="card">Blog posts will load from Firebase</div>
-  </div>
-</section>
-
-<!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
   <div class="grid">
@@ -240,7 +214,6 @@ footer{
 <script type="module" src="js/auth.js"></script>
 <script type="module" src="js/blog.js"></script>
 
-<!-- UI SCRIPT -->
 <script>
 function toggleMenu(){
   document.getElementById("nav").classList.toggle("show");
