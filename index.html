@@ -31,6 +31,7 @@
   --light-bg:#f8f9fa;
   --success:#28a745;
   --danger:#dc3545;
+  --warning:#ffc107;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -145,6 +146,13 @@ p{text-align:center;color:var(--muted)}
 .stat-item {
   text-align: center;
   min-width: 200px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+.stat-item.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 .stat-number {
   font-size: 3rem;
@@ -175,6 +183,12 @@ p{text-align:center;color:var(--muted)}
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
   cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.featured-item.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 .featured-item:hover {
   transform: translateY(-10px);
@@ -271,6 +285,12 @@ p{text-align:center;color:var(--muted)}
   transition: all 0.3s ease;
   overflow: hidden;
   position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 .card:hover {
   transform: translateY(-10px);
@@ -369,55 +389,6 @@ p{text-align:center;color:var(--muted)}
   color: var(--accent);
 }
 
-/* TESTIMONIALS SECTION */
-.testimonials {
-  background: var(--light-bg);
-  padding: 80px 60px;
-}
-.testimonial-container {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-.testimonial-item {
-  display: none;
-  padding: 30px;
-}
-.testimonial-item.active {
-  display: block;
-}
-.testimonial-text {
-  font-size: 1.2rem;
-  font-style: italic;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-.testimonial-author {
-  font-weight: 600;
-  color: var(--accent);
-}
-.testimonial-position {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-.testimonial-dots {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #ddd;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-.dot.active {
-  background: var(--accent);
-}
-
 /* REVIEWS SECTION */
 .reviews-section {
   background: var(--light-bg);
@@ -439,6 +410,12 @@ p{text-align:center;color:var(--muted)}
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
   transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.review-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 .review-card:hover {
   transform: translateY(-5px);
@@ -477,7 +454,7 @@ p{text-align:center;color:var(--muted)}
   color: var(--text);
 }
 
-/* IMPROVED CONTACT SECTION */
+/* IMPROVED CONTACT SECTION - CORRECTED SIZE */
 #contact {
   background: var(--light-bg);
   position: relative;
@@ -488,7 +465,7 @@ p{text-align:center;color:var(--muted)}
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 40px;
   align-items: start;
 }
 .contact-left {
@@ -496,12 +473,14 @@ p{text-align:center;color:var(--muted)}
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  height: fit-content;
 }
 .contact-right {
   background: white;
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  height: fit-content;
 }
 .contact-title {
   font-size: 1.8rem;
@@ -595,6 +574,90 @@ textarea {
   box-shadow: 0 5px 15px rgba(0,187,212,0.3);
 }
 
+/* CLIENT TESTIMONIALS SECTION */
+.testimonials {
+  background: var(--light-bg);
+  padding: 80px 60px;
+}
+.testimonial-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+.testimonial-item {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.testimonial-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.testimonial-item:before {
+  content: '"';
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 60px;
+  color: var(--accent);
+  opacity: 0.2;
+}
+.testimonial-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+}
+.testimonial-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 15px;
+}
+.testimonial-info h4 {
+  margin: 0 0 5px 0;
+  color: var(--text);
+}
+.testimonial-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.testimonial-rating {
+  color: #ffc107;
+  margin-bottom: 15px;
+}
+.google-review {
+  display: inline-flex;
+  align-items: center;
+  background: #4285f4;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-left: 10px;
+}
+.google-review i {
+  margin-right: 5px;
+}
+
 /* Modal for portfolio items */
 .modal {
   display: none;
@@ -657,7 +720,7 @@ textarea {
   font-size: 0.9rem;
 }
 
-/* ADMIN PAGE */
+/* ADMIN PAGE - IMPROVED DESIGN */
 .admin-page {
   display: none;
   min-height: 100vh;
@@ -670,9 +733,15 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 .admin-title {
   font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+}
+.admin-title i {
+  margin-right: 10px;
 }
 .admin-nav {
   display: flex;
@@ -690,8 +759,54 @@ textarea {
 }
 .admin-content {
   padding: 40px 60px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+}
+.admin-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.admin-stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+}
+.admin-stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  font-size: 1.5rem;
+  color: white;
+}
+.admin-stat-icon.portfolio {
+  background: var(--accent);
+}
+.admin-stat-icon.featured {
+  background: var(--success);
+}
+.admin-stat-icon.reviews {
+  background: var(--warning);
+}
+.admin-stat-icon.messages {
+  background: var(--danger);
+}
+.admin-stat-info h3 {
+  margin: 0 0 5px 0;
+  font-size: 2rem;
+  color: var(--text);
+}
+.admin-stat-info p {
+  margin: 0;
+  color: var(--muted);
 }
 .admin-section {
   background: white;
@@ -700,9 +815,39 @@ textarea {
   margin-bottom: 30px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
+.admin-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
 .admin-section h2 {
   text-align: left;
-  margin-bottom: 20px;
+  margin: 0;
+}
+.admin-section h2:after {
+  left: 0;
+  width: 40px;
+}
+.add-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+.add-btn:hover {
+  background: #00a8c0;
+}
+.add-btn i {
+  margin-right: 8px;
 }
 .admin-table {
   width: 100%;
@@ -740,46 +885,81 @@ textarea {
 .btn-edit:hover, .btn-delete:hover {
   opacity: 0.8;
 }
-
-/* VIEWERS PAGE */
-.viewers-page {
+.form-modal {
   display: none;
-  min-height: 100vh;
-  background: var(--light-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 3000;
+  overflow: auto;
 }
-.viewers-header {
-  background: var(--nav);
-  color: white;
-  padding: 20px 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.viewers-content {
-  padding: 40px 60px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.review-form {
-  background: white;
+.form-modal-content {
+  background-color: white;
+  margin: 5% auto;
   padding: 30px;
-  border-radius: 12px;
-  margin-bottom: 40px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  width: 80%;
+  max-width: 600px;
+  border-radius: 16px;
+  position: relative;
+  animation: modalopen 0.5s;
 }
-.rating-input {
-  display: flex;
-  gap: 10px;
+.close-form-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  color: var(--text);
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.form-group {
   margin-bottom: 20px;
 }
-.star {
-  font-size: 24px;
-  color: #ddd;
-  cursor: pointer;
-  transition: color 0.3s ease;
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text);
 }
-.star.active {
-  color: #ffc107;
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.btn-cancel {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-save {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 /* LOGIN PAGE */
@@ -937,11 +1117,59 @@ footer{
   opacity: 1;
 }
 
+/* REVIEW FORM ON MAIN PAGE */
+.review-form {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.rating-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.star {
+  font-size: 24px;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.star.active {
+  color: #ffc107;
+}
+.google-review-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.google-review-option input {
+  width: auto;
+  margin-right: 10px;
+}
+.google-review-option label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.google-review-option label i {
+  color: #4285f4;
+  margin-right: 5px;
+}
+
 /* Responsive adjustments */
 @media(max-width: 992px) {
   .contact-container {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+  .testimonial-container {
+    grid-template-columns: 1fr;
+  }
+  .admin-dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 </style>
@@ -970,6 +1198,7 @@ footer{
     <a href="#featured">Featured</a>
     <a href="#portfolio">Portfolio</a>
     <a href="#reviews">Reviews</a>
+    <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -986,19 +1215,19 @@ footer{
 <!-- STATS SECTION -->
 <section class="stats-section" id="stats">
   <div class="stats-container">
-    <div class="stat-item" data-aos="fade-up">
+    <div class="stat-item">
       <span class="stat-number" data-target="150">0</span>
       <span class="stat-label">Projects Completed</span>
     </div>
-    <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+    <div class="stat-item">
       <span class="stat-number" data-target="98">0</span>
       <span class="stat-label">Happy Clients</span>
     </div>
-    <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+    <div class="stat-item">
       <span class="stat-number" data-target="12">0</span>
       <span class="stat-label">Years Experience</span>
     </div>
-    <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+    <div class="stat-item">
       <span class="stat-number" data-target="15">0</span>
       <span class="stat-label">Team Members</span>
     </div>
@@ -1007,52 +1236,52 @@ footer{
 
 <!-- FEATURED WORKS SECTION -->
 <section class="featured-works" id="featured">
-  <h2 data-aos="fade-up">Featured Works</h2>
+  <h2>Featured Works</h2>
   <div class="featured-grid" id="featuredGrid">
     <!-- Featured works will be dynamically loaded here -->
   </div>
 </section>
 
 <section id="services">
-  <h2 data-aos="fade-up">Our Services</h2>
+  <h2>Our Services</h2>
   <div class="grid">
-    <div class="card" data-aos="fade-up" data-aos-delay="100">
+    <div class="card">
       <div class="card-icon"><i class="fas fa-palette"></i></div>
       <h3>Logo & Branding</h3>
-      <p>Creating unique brand identities that leave a lasting impression and set you apart from the competition.</p>
+      <p>Creating unique brand identities that leave a lasting impression and set you apart from competition.</p>
     </div>
-    <div class="card" data-aos="fade-up" data-aos-delay="200">
+    <div class="card">
       <div class="card-icon"><i class="fas fa-print"></i></div>
       <h3>Poster & Flyer Design</h3>
       <p>Eye-catching marketing materials that grab attention and communicate your message effectively.</p>
     </div>
-    <div class="card" data-aos="fade-up" data-aos-delay="300">
+    <div class="card">
       <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
       <h3>Web Design</h3>
       <p>Beautiful, responsive websites that deliver results and provide exceptional user experiences.</p>
     </div>
-    <div class="card" data-aos="fade-up" data-aos-delay="400">
+    <div class="card">
       <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
       <h3>Social Media Design</h3>
       <p>Engaging visuals for your social media platforms that increase engagement and brand awareness.</p>
     </div>
-    <div class="card" data-aos="fade-up" data-aos-delay="500">
+    <div class="card">
       <div class="card-icon"><i class="fas fa-video"></i></div>
       <h3>Motion Graphics</h3>
       <p>Dynamic animations and video content that bring your brand to life and captivate your audience.</p>
     </div>
-    <div class="card" data-aos="fade-up" data-aos-delay="600">
+    <div class="card">
       <div class="card-icon"><i class="fas fa-camera"></i></div>
       <h3>Photography</h3>
-      <p>Professional photography services that showcase your products and brand in the best light.</p>
+      <p>Professional photography services that showcase your products and brand in best light.</p>
     </div>
   </div>
 </section>
 
 <!-- CONTINUOUS IMAGE ANIMATION SECTION -->
 <section>
-  <h2 data-aos="fade-up">Recent Works</h2>
-  <div class="ticker-container" data-aos="fade-up" data-aos-delay="100">
+  <h2>Recent Works</h2>
+  <div class="ticker-container">
     <div class="ticker-content">
       <div class="ticker-item"><img src="https://picsum.photos/seed/ticker1/300/200.jpg" alt="Recent Work"></div>
       <div class="ticker-item"><img src="https://picsum.photos/seed/ticker2/300/200.jpg" alt="Recent Work"></div>
@@ -1062,7 +1291,7 @@ footer{
       <div class="ticker-item"><img src="https://picsum.photos/seed/ticker6/300/200.jpg" alt="Recent Work"></div>
       <div class="ticker-item"><img src="https://picsum.photos/seed/ticker7/300/200.jpg" alt="Recent Work"></div>
       <div class="ticker-item"><img src="https://picsum.photos/seed/ticker8/300/200.jpg" alt="Recent Work"></div>
-      <!-- Duplicate the images for seamless loop -->
+      <!-- Duplicate images for seamless loop -->
       <div class="ticker-item"><img src="https://picsum.photos/seed/ticker1/300/200.jpg" alt="Recent Work"></div>
       <div class="ticker-item"><img src="https://picsum.photos/seed/ticker2/300/200.jpg" alt="Recent Work"></div>
       <div class="ticker-item"><img src="https://picsum.photos/seed/ticker3/300/200.jpg" alt="Recent Work"></div>
@@ -1076,9 +1305,9 @@ footer{
 </section>
 
 <section id="portfolio">
-  <h2 data-aos="fade-up">Portfolio</h2>
+  <h2>Portfolio</h2>
   
-  <div class="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
+  <div class="portfolio-filters">
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="branding">Branding</button>
     <button class="filter-btn" data-filter="web">Web Design</button>
@@ -1093,7 +1322,43 @@ footer{
 
 <!-- REVIEWS SECTION -->
 <section class="reviews-section" id="reviews">
-  <h2 data-aos="fade-up">Client Reviews</h2>
+  <h2>Client Reviews</h2>
+  <div class="review-form">
+    <h3>Write a Review</h3>
+    <form id="reviewForm">
+      <div class="form-group">
+        <label for="reviewerName">Your Name</label>
+        <input type="text" id="reviewerName" placeholder="John Doe" required>
+      </div>
+      <div class="form-group">
+        <label for="reviewerEmail">Email Address</label>
+        <input type="email" id="reviewerEmail" placeholder="john@example.com" required>
+      </div>
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="rating-input">
+          <span class="star" data-rating="1">★</span>
+          <span class="star" data-rating="2">★</span>
+          <span class="star" data-rating="3">★</span>
+          <span class="star" data-rating="4">★</span>
+          <span class="star" data-rating="5">★</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="google-review-option">
+          <input type="checkbox" id="googleReview">
+          <label for="googleReview">
+            <i class="fab fa-google"></i> Also post on Google Reviews
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="reviewText">Your Review</label>
+        <textarea id="reviewText" placeholder="Share your experience with us..." required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Submit Review</button>
+    </form>
+  </div>
   <div class="reviews-container">
     <div class="reviews-grid" id="reviewsGrid">
       <!-- Reviews will be dynamically loaded here -->
@@ -1101,37 +1366,18 @@ footer{
   </div>
 </section>
 
-<!-- TESTIMONIALS SECTION -->
+<!-- CLIENT TESTIMONIALS SECTION -->
 <section class="testimonials" id="testimonials">
-  <h2 data-aos="fade-up">What Clients Say</h2>
-  <div class="testimonial-container">
-    <div class="testimonial-item active" data-aos="fade-up">
-      <p class="testimonial-text">"Working with CreativeAgency was an absolute pleasure. They understood our vision perfectly and delivered a brand identity that exceeded our expectations. Highly recommended!"</p>
-      <p class="testimonial-author">Sarah Johnson</p>
-      <p class="testimonial-position">CEO, TechStart</p>
-    </div>
-    <div class="testimonial-item">
-      <p class="testimonial-text">"The website design created by CreativeAgency has transformed our online presence. Our conversion rates have increased by 40% since launch. Exceptional work!"</p>
-      <p class="testimonial-author">Michael Chen</p>
-      <p class="testimonial-position">Marketing Director, RetailHub</p>
-    </div>
-    <div class="testimonial-item">
-      <p class="testimonial-text">"CreativeAgency brought our social media to life with stunning visuals that perfectly capture our brand essence. Our engagement has never been higher!"</p>
-      <p class="testimonial-author">Emily Rodriguez</p>
-      <p class="testimonial-position">Founder, BeautyBrand</p>
-    </div>
-    <div class="testimonial-dots">
-      <span class="dot active" onclick="showTestimonial(0)"></span>
-      <span class="dot" onclick="showTestimonial(1)"></span>
-      <span class="dot" onclick="showTestimonial(2)"></span>
-    </div>
+  <h2>What Our Clients Say</h2>
+  <div class="testimonial-container" id="testimonialContainer">
+    <!-- Testimonials will be dynamically loaded here -->
   </div>
 </section>
 
 <!-- IMPROVED CONTACT SECTION -->
 <section id="contact">
   <div class="contact-container">
-    <div class="contact-left" data-aos="fade-right">
+    <div class="contact-left">
       <h2 class="contact-title">Get In Touch</h2>
       <p style="margin-bottom: 30px; color: var(--muted);">Have a project in mind? Let's create something amazing together!</p>
       
@@ -1168,7 +1414,7 @@ footer{
       </div>
     </div>
     
-    <div class="contact-right" data-aos="fade-left">
+    <div class="contact-right">
       <h2 class="contact-title">Send Us a Message</h2>
       <form id="contactForm">
         <div class="form-group">
@@ -1197,7 +1443,6 @@ footer{
   © 2025 CreativeAgency. All rights reserved.
   <div class="page-links">
     <a href="#" onclick="showLogin(event)">Admin</a>
-    <a href="#" onclick="showViewersPage(event)">Viewers</a>
   </div>
 </footer>
 
@@ -1235,7 +1480,6 @@ footer{
     </form>
     <div class="login-options">
       <a href="#" onclick="showMainWebsite(event)">Back to Website</a>
-      <a href="#" onclick="showViewersPage(event)">Viewers Page</a>
     </div>
     <p id="loginError" style="color: red; margin-top: 15px; text-align: center; display: none;">Invalid email or password</p>
   </div>
@@ -1244,17 +1488,52 @@ footer{
 <!-- ADMIN PAGE -->
 <div id="adminPage" class="admin-page">
   <header class="admin-header">
-    <div class="admin-title">Admin Dashboard</div>
+    <div class="admin-title"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</div>
     <nav class="admin-nav">
       <a href="#" onclick="showMainWebsite(event)">Website</a>
-      <a href="#" onclick="showViewersPage(event)">Viewers</a>
       <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
   
   <div class="admin-content">
+    <!-- ADMIN DASHBOARD -->
+    <div class="admin-dashboard">
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon portfolio"><i class="fas fa-briefcase"></i></div>
+        <div class="admin-stat-info">
+          <h3 id="portfolioCount">0</h3>
+          <p>Portfolio Items</p>
+        </div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon featured"><i class="fas fa-star"></i></div>
+        <div class="admin-stat-info">
+          <h3 id="featuredCount">0</h3>
+          <p>Featured Works</p>
+        </div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon reviews"><i class="fas fa-comment"></i></div>
+        <div class="admin-stat-info">
+          <h3 id="reviewsCount">0</h3>
+          <p>Reviews</p>
+        </div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon messages"><i class="fas fa-envelope"></i></div>
+        <div class="admin-stat-info">
+          <h3>5</h3>
+          <p>New Messages</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- PORTFOLIO MANAGEMENT -->
     <div class="admin-section">
-      <h2>Portfolio Management</h2>
+      <div class="admin-section-header">
+        <h2>Portfolio Management</h2>
+        <button class="add-btn" onclick="openPortfolioForm()"><i class="fas fa-plus"></i> Add New</button>
+      </div>
       <table class="admin-table">
         <thead>
           <tr>
@@ -1271,8 +1550,12 @@ footer{
       </table>
     </div>
     
+    <!-- FEATURED WORKS MANAGEMENT -->
     <div class="admin-section">
-      <h2>Featured Works Management</h2>
+      <div class="admin-section-header">
+        <h2>Featured Works Management</h2>
+        <button class="add-btn" onclick="openFeaturedForm()"><i class="fas fa-plus"></i> Add New</button>
+      </div>
       <table class="admin-table">
         <thead>
           <tr>
@@ -1288,8 +1571,12 @@ footer{
       </table>
     </div>
     
+    <!-- REVIEWS MANAGEMENT -->
     <div class="admin-section">
-      <h2>Reviews Management</h2>
+      <div class="admin-section-header">
+        <h2>Reviews Management</h2>
+        <button class="add-btn" onclick="openReviewForm()"><i class="fas fa-plus"></i> Add New</button>
+      </div>
       <table class="admin-table">
         <thead>
           <tr>
@@ -1305,55 +1592,189 @@ footer{
         </tbody>
       </table>
     </div>
+    
+    <!-- TESTIMONIALS MANAGEMENT -->
+    <div class="admin-section">
+      <div class="admin-section-header">
+        <h2>Testimonials Management</h2>
+        <button class="add-btn" onclick="openTestimonialForm()"><i class="fas fa-plus"></i> Add New</button>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="testimonialsTable">
+          <!-- Testimonials will be loaded here -->
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
-<!-- VIEWERS PAGE -->
-<div id="viewersPage" class="viewers-page">
-  <header class="viewers-header">
-    <div class="admin-title">Viewers Portal</div>
-    <nav class="admin-nav">
-      <a href="#" onclick="showMainWebsite(event)">Website</a>
-      <a href="#" onclick="showLogin(event)">Admin</a>
-    </nav>
-  </header>
-  
-  <div class="viewers-content">
-    <div class="review-form">
-      <h2>Write a Review</h2>
-      <form id="reviewForm">
-        <div class="form-group">
-          <label for="reviewerName">Your Name</label>
-          <input type="text" id="reviewerName" placeholder="John Doe" required>
-        </div>
-        <div class="form-group">
-          <label for="reviewerEmail">Email Address</label>
-          <input type="email" id="reviewerEmail" placeholder="john@example.com" required>
-        </div>
-        <div class="form-group">
-          <label>Rating</label>
-          <div class="rating-input">
-            <span class="star" data-rating="1">★</span>
-            <span class="star" data-rating="2">★</span>
-            <span class="star" data-rating="3">★</span>
-            <span class="star" data-rating="4">★</span>
-            <span class="star" data-rating="5">★</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="reviewText">Your Review</label>
-          <textarea id="reviewText" placeholder="Share your experience with us..." required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Submit Review</button>
-      </form>
-    </div>
-    
-    <div class="admin-section">
-      <h2>All Reviews</h2>
-      <div class="reviews-grid" id="allReviewsGrid">
-        <!-- All reviews will be loaded here -->
+<!-- PORTFOLIO FORM MODAL -->
+<div id="portfolioFormModal" class="form-modal">
+  <div class="form-modal-content">
+    <span class="close-form-modal" onclick="closePortfolioForm()">&times;</span>
+    <h2 id="portfolioFormTitle">Add Portfolio Item</h2>
+    <form id="portfolioForm">
+      <input type="hidden" id="portfolioId">
+      <div class="form-group">
+        <label for="portfolioTitle">Title</label>
+        <input type="text" id="portfolioTitle" required>
       </div>
-    </div>
+      <div class="form-group">
+        <label for="portfolioCategory">Category</label>
+        <select id="portfolioCategory" required>
+          <option value="branding">Branding</option>
+          <option value="web">Web Design</option>
+          <option value="print">Print</option>
+          <option value="social">Social Media</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="portfolioDescription">Description</label>
+        <textarea id="portfolioDescription" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="portfolioClient">Client</label>
+        <input type="text" id="portfolioClient" required>
+      </div>
+      <div class="form-group">
+        <label for="portfolioDate">Date</label>
+        <input type="text" id="portfolioDate" placeholder="e.g. January 2023" required>
+      </div>
+      <div class="form-group">
+        <label for="portfolioImage">Image URL</label>
+        <input type="text" id="portfolioImage" placeholder="https://example.com/image.jpg" required>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="closePortfolioForm()">Cancel</button>
+        <button type="submit" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- FEATURED FORM MODAL -->
+<div id="featuredFormModal" class="form-modal">
+  <div class="form-modal-content">
+    <span class="close-form-modal" onclick="closeFeaturedForm()">&times;</span>
+    <h2 id="featuredFormTitle">Add Featured Work</h2>
+    <form id="featuredForm">
+      <input type="hidden" id="featuredId">
+      <div class="form-group">
+        <label for="featuredTitle">Title</label>
+        <input type="text" id="featuredTitle" required>
+      </div>
+      <div class="form-group">
+        <label for="featuredCategory">Category</label>
+        <select id="featuredCategory" required>
+          <option value="branding">Branding</option>
+          <option value="web">Web Design</option>
+          <option value="print">Print</option>
+          <option value="social">Social Media</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="featuredDescription">Description</label>
+        <textarea id="featuredDescription" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="featuredImage">Image URL</label>
+        <input type="text" id="featuredImage" placeholder="https://example.com/image.jpg" required>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="closeFeaturedForm()">Cancel</button>
+        <button type="submit" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- REVIEW FORM MODAL -->
+<div id="reviewFormModal" class="form-modal">
+  <div class="form-modal-content">
+    <span class="close-form-modal" onclick="closeReviewForm()">&times;</span>
+    <h2 id="reviewFormTitle">Add Review</h2>
+    <form id="adminReviewForm">
+      <input type="hidden" id="reviewId">
+      <div class="form-group">
+        <label for="reviewName">Name</label>
+        <input type="text" id="reviewName" required>
+      </div>
+      <div class="form-group">
+        <label for="reviewEmail">Email</label>
+        <input type="email" id="reviewEmail" required>
+      </div>
+      <div class="form-group">
+        <label for="reviewRating">Rating</label>
+        <select id="reviewRating" required>
+          <option value="5">5 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Star</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="reviewText">Review Text</label>
+        <textarea id="reviewText" required></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="closeReviewForm()">Cancel</button>
+        <button type="submit" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TESTIMONIAL FORM MODAL -->
+<div id="testimonialFormModal" class="form-modal">
+  <div class="form-modal-content">
+    <span class="close-form-modal" onclick="closeTestimonialForm()">&times;</span>
+    <h2 id="testimonialFormTitle">Add Testimonial</h2>
+    <form id="testimonialForm">
+      <input type="hidden" id="testimonialId">
+      <div class="form-group">
+        <label for="testimonialName">Name</label>
+        <input type="text" id="testimonialName" required>
+      </div>
+      <div class="form-group">
+        <label for="testimonialPosition">Position</label>
+        <input type="text" id="testimonialPosition" required>
+      </div>
+      <div class="form-group">
+        <label for="testimonialCompany">Company</label>
+        <input type="text" id="testimonialCompany" required>
+      </div>
+      <div class="form-group">
+        <label for="testimonialText">Testimonial</label>
+        <textarea id="testimonialText" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="testimonialImage">Image URL (optional)</label>
+        <input type="text" id="testimonialImage" placeholder="https://example.com/image.jpg">
+      </div>
+      <div class="form-group">
+        <label for="testimonialRating">Rating</label>
+        <select id="testimonialRating" required>
+          <option value="5">5 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Star</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="closeTestimonialForm()">Cancel</button>
+        <button type="submit" class="btn-save">Save</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -1369,7 +1790,7 @@ footer{
 // Initialize AOS
 AOS.init({
   duration: 800,
-  once: true
+  once: false
 });
 
 // Hide loader when page is fully loaded
@@ -1389,7 +1810,6 @@ function showMainWebsite(event) {
   document.getElementById('mainWebsite').style.display = 'block';
   document.getElementById('loginPage').style.display = 'none';
   document.getElementById('adminPage').style.display = 'none';
-  document.getElementById('viewersPage').style.display = 'none';
 }
 
 function showLogin(event) {
@@ -1397,24 +1817,14 @@ function showLogin(event) {
   document.getElementById('mainWebsite').style.display = 'none';
   document.getElementById('loginPage').style.display = 'flex';
   document.getElementById('adminPage').style.display = 'none';
-  document.getElementById('viewersPage').style.display = 'none';
 }
 
 function showAdminPage() {
   document.getElementById('mainWebsite').style.display = 'none';
   document.getElementById('loginPage').style.display = 'none';
   document.getElementById('adminPage').style.display = 'block';
-  document.getElementById('viewersPage').style.display = 'none';
   loadAdminTables();
-}
-
-function showViewersPage(event) {
-  if (event) event.preventDefault();
-  document.getElementById('mainWebsite').style.display = 'none';
-  document.getElementById('loginPage').style.display = 'none';
-  document.getElementById('adminPage').style.display = 'none';
-  document.getElementById('viewersPage').style.display = 'block';
-  loadAllReviews();
+  updateAdminStats();
 }
 
 function logout() {
@@ -1425,60 +1835,6 @@ function logout() {
 function toggleMenu(){
   document.getElementById("nav").classList.toggle("show");
 }
-
-// Testimonial slider
-function showTestimonial(index) {
-  const testimonials = document.querySelectorAll('.testimonial-item');
-  const dots = document.querySelectorAll('.dot');
-  
-  testimonials.forEach(item => item.classList.remove('active'));
-  dots.forEach(dot => dot.classList.remove('active'));
-  
-  testimonials[index].classList.add('active');
-  dots[index].classList.add('active');
-}
-
-// Auto-rotate testimonials
-let currentTestimonial = 0;
-setInterval(() => {
-  currentTestimonial = (currentTestimonial + 1) % 3;
-  showTestimonial(currentTestimonial);
-}, 5000);
-
-// Animated counter for stats
-function animateCounter() {
-  const counters = document.querySelectorAll('.stat-number');
-  const speed = 200;
-  
-  counters.forEach(counter => {
-    const target = +counter.getAttribute('data-target');
-    const increment = target / speed;
-    
-    const updateCount = () => {
-      const count = +counter.innerText;
-      
-      if (count < target) {
-        counter.innerText = Math.ceil(count + increment);
-        setTimeout(updateCount, 1);
-      } else {
-        counter.innerText = target;
-      }
-    };
-    
-    updateCount();
-  });
-}
-
-// Trigger counter animation when stats section is in view
-const statsSection = document.getElementById('stats');
-const statsObserver = new IntersectionObserver((entries) => {
-  if (entries[0].isIntersecting) {
-    animateCounter();
-    statsObserver.unobserve(statsSection);
-  }
-}, { threshold: 0.5 });
-
-statsObserver.observe(statsSection);
 
 // Portfolio filtering
 const filterBtns = document.querySelectorAll('.filter-btn');
@@ -1519,6 +1875,7 @@ const closeModal = document.querySelector('.close-modal');
 let portfolioData = {};
 let featuredData = {};
 let reviewsData = {};
+let testimonialsData = {};
 
 // Open modal with portfolio data
 function openPortfolioModal(id) {
@@ -1605,6 +1962,7 @@ document.getElementById('reviewForm').addEventListener('submit', (e) => {
   const email = document.getElementById('reviewerEmail').value;
   const rating = document.querySelectorAll('.star.active').length;
   const text = document.getElementById('reviewText').value;
+  const googleReview = document.getElementById('googleReview').checked;
   
   // Create a new review
   const newReview = {
@@ -1612,7 +1970,8 @@ document.getElementById('reviewForm').addEventListener('submit', (e) => {
     email,
     rating,
     text,
-    date: new Date().toLocaleDateString()
+    date: new Date().toLocaleDateString(),
+    googleReview
   };
   
   // Add to reviews data
@@ -1650,7 +2009,6 @@ document.getElementById('reviewForm').addEventListener('submit', (e) => {
   
   // Reload reviews
   loadReviews();
-  loadAllReviews();
 });
 
 // Star rating functionality
@@ -1777,39 +2135,45 @@ function loadReviews() {
   AOS.refresh();
 }
 
-// Load all reviews for viewers page
-function loadAllReviews() {
-  const allReviewsGrid = document.getElementById('allReviewsGrid');
+// Load testimonials
+function loadTestimonials() {
+  const testimonialContainer = document.getElementById('testimonialContainer');
   
   // Clear existing items
-  allReviewsGrid.innerHTML = '';
+  testimonialContainer.innerHTML = '';
   
-  // Add all items from data
-  Object.keys(reviewsData).forEach(id => {
-    const review = reviewsData[id];
+  // Add items from data
+  Object.keys(testimonialsData).forEach((id, index) => {
+    const testimonial = testimonialsData[id];
     
-    const reviewCard = document.createElement('div');
-    reviewCard.className = 'review-card';
+    const testimonialItem = document.createElement('div');
+    testimonialItem.className = 'testimonial-item';
+    testimonialItem.setAttribute('data-aos', 'fade-up');
+    testimonialItem.setAttribute('data-aos-delay', (index + 1) * 100);
     
     let stars = '';
     for (let i = 1; i <= 5; i++) {
-      stars += `<span class="${i <= review.rating ? 'active' : ''}">★</span>`;
+      stars += `<span class="${i <= testimonial.rating ? 'active' : ''}">★</span>`;
     }
     
-    reviewCard.innerHTML = `
-      <div class="review-header">
-        <div class="review-avatar">${review.name.charAt(0).toUpperCase()}</div>
-        <div class="review-info">
-          <h4>${review.name}</h4>
-          <div class="review-date">${review.date}</div>
+    testimonialItem.innerHTML = `
+      <div class="testimonial-text">${testimonial.text}</div>
+      <div class="testimonial-rating">${stars}</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">${testimonial.name.charAt(0).toUpperCase()}</div>
+        <div class="testimonial-info">
+          <h4>${testimonial.name}</h4>
+          <p>${testimonial.position}, ${testimonial.company}</p>
+          ${testimonial.googleReview ? '<span class="google-review"><i class="fab fa-google"></i> Google Review</span>' : ''}
         </div>
       </div>
-      <div class="review-rating">${stars}</div>
-      <div class="review-text">${review.text}</div>
     `;
     
-    allReviewsGrid.appendChild(reviewCard);
+    testimonialContainer.appendChild(testimonialItem);
   });
+  
+  // Reinitialize AOS
+  AOS.refresh();
 }
 
 // Load admin tables
@@ -1828,7 +2192,7 @@ function loadAdminTables() {
       <td>${item.client}</td>
       <td>
         <div class="admin-actions">
-          <button class="btn-edit">Edit</button>
+          <button class="btn-edit" onclick="editPortfolioItem('${id}')">Edit</button>
           <button class="btn-delete" onclick="deletePortfolioItem('${id}')">Delete</button>
         </div>
       </td>
@@ -1849,7 +2213,7 @@ function loadAdminTables() {
       <td>${item.category}</td>
       <td>
         <div class="admin-actions">
-          <button class="btn-edit">Edit</button>
+          <button class="btn-edit" onclick="editFeaturedItem('${id}')">Edit</button>
           <button class="btn-delete" onclick="deleteFeaturedItem('${id}')">Delete</button>
         </div>
       </td>
@@ -1877,6 +2241,254 @@ function loadAdminTables() {
     `;
     reviewsTable.appendChild(row);
   });
+  
+  // Load testimonials table
+  const testimonialsTable = document.getElementById('testimonialsTable');
+  testimonialsTable.innerHTML = '';
+  
+  Object.keys(testimonialsData).forEach(id => {
+    const testimonial = testimonialsData[id];
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${id}</td>
+      <td>${testimonial.name}</td>
+      <td>${testimonial.position}</td>
+      <td>
+        <div class="admin-actions">
+          <button class="btn-edit" onclick="editTestimonialItem('${id}')">Edit</button>
+          <button class="btn-delete" onclick="deleteTestimonialItem('${id}')">Delete</button>
+        </div>
+      </td>
+    `;
+    testimonialsTable.appendChild(row);
+  });
+}
+
+// Update admin stats
+function updateAdminStats() {
+  document.getElementById('portfolioCount').textContent = Object.keys(portfolioData).length;
+  document.getElementById('featuredCount').textContent = Object.keys(featuredData).length;
+  document.getElementById('reviewsCount').textContent = Object.keys(reviewsData).length;
+}
+
+// Portfolio form functions
+function openPortfolioForm(id = null) {
+  document.getElementById('portfolioFormModal').style.display = 'block';
+  
+  if (id) {
+    // Edit mode
+    const item = portfolioData[id];
+    document.getElementById('portfolioFormTitle').textContent = 'Edit Portfolio Item';
+    document.getElementById('portfolioId').value = id;
+    document.getElementById('portfolioTitle').value = item.title;
+    document.getElementById('portfolioCategory').value = item.category;
+    document.getElementById('portfolioDescription').value = item.description;
+    document.getElementById('portfolioClient').value = item.client;
+    document.getElementById('portfolioDate').value = item.date;
+    document.getElementById('portfolioImage').value = item.image;
+  } else {
+    // Add mode
+    document.getElementById('portfolioFormTitle').textContent = 'Add Portfolio Item';
+    document.getElementById('portfolioForm').reset();
+    document.getElementById('portfolioId').value = '';
+  }
+}
+
+function closePortfolioForm() {
+  document.getElementById('portfolioFormModal').style.display = 'none';
+}
+
+// Portfolio form submission
+document.getElementById('portfolioForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const id = document.getElementById('portfolioId').value;
+  const title = document.getElementById('portfolioTitle').value;
+  const category = document.getElementById('portfolioCategory').value;
+  const description = document.getElementById('portfolioDescription').value;
+  const client = document.getElementById('portfolioClient').value;
+  const date = document.getElementById('portfolioDate').value;
+  const image = document.getElementById('portfolioImage').value;
+  
+  if (id) {
+    // Update existing item
+    portfolioData[id] = { title, category, description, client, date, image };
+  } else {
+    // Add new item
+    const newId = Date.now().toString();
+    portfolioData[newId] = { title, category, description, client, date, image };
+  }
+  
+  closePortfolioForm();
+  loadPortfolioItems();
+  loadAdminTables();
+  updateAdminStats();
+});
+
+// Featured form functions
+function openFeaturedForm(id = null) {
+  document.getElementById('featuredFormModal').style.display = 'block';
+  
+  if (id) {
+    // Edit mode
+    const item = featuredData[id];
+    document.getElementById('featuredFormTitle').textContent = 'Edit Featured Work';
+    document.getElementById('featuredId').value = id;
+    document.getElementById('featuredTitle').value = item.title;
+    document.getElementById('featuredCategory').value = item.category;
+    document.getElementById('featuredDescription').value = item.description;
+    document.getElementById('featuredImage').value = item.image;
+  } else {
+    // Add mode
+    document.getElementById('featuredFormTitle').textContent = 'Add Featured Work';
+    document.getElementById('featuredForm').reset();
+    document.getElementById('featuredId').value = '';
+  }
+}
+
+function closeFeaturedForm() {
+  document.getElementById('featuredFormModal').style.display = 'none';
+}
+
+// Featured form submission
+document.getElementById('featuredForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const id = document.getElementById('featuredId').value;
+  const title = document.getElementById('featuredTitle').value;
+  const category = document.getElementById('featuredCategory').value;
+  const description = document.getElementById('featuredDescription').value;
+  const image = document.getElementById('featuredImage').value;
+  
+  if (id) {
+    // Update existing item
+    featuredData[id] = { title, category, description, image };
+  } else {
+    // Add new item
+    const newId = Date.now().toString();
+    featuredData[newId] = { title, category, description, image };
+  }
+  
+  closeFeaturedForm();
+  loadFeaturedItems();
+  loadAdminTables();
+  updateAdminStats();
+});
+
+// Review form functions
+function openReviewForm(id = null) {
+  document.getElementById('reviewFormModal').style.display = 'block';
+  
+  if (id) {
+    // Edit mode
+    const review = reviewsData[id];
+    document.getElementById('reviewFormTitle').textContent = 'Edit Review';
+    document.getElementById('reviewId').value = id;
+    document.getElementById('reviewName').value = review.name;
+    document.getElementById('reviewEmail').value = review.email;
+    document.getElementById('reviewRating').value = review.rating;
+    document.getElementById('reviewText').value = review.text;
+  } else {
+    // Add mode
+    document.getElementById('reviewFormTitle').textContent = 'Add Review';
+    document.getElementById('adminReviewForm').reset();
+    document.getElementById('reviewId').value = '';
+  }
+}
+
+function closeReviewForm() {
+  document.getElementById('reviewFormModal').style.display = 'none';
+}
+
+// Review form submission
+document.getElementById('adminReviewForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const id = document.getElementById('reviewId').value;
+  const name = document.getElementById('reviewName').value;
+  const email = document.getElementById('reviewEmail').value;
+  const rating = parseInt(document.getElementById('reviewRating').value);
+  const text = document.getElementById('reviewText').value;
+  
+  if (id) {
+    // Update existing review
+    reviewsData[id] = { name, email, rating, text, date: reviewsData[id].date };
+  } else {
+    // Add new review
+    const newId = Date.now().toString();
+    reviewsData[newId] = { name, email, rating, text, date: new Date().toLocaleDateString() };
+  }
+  
+  closeReviewForm();
+  loadReviews();
+  loadAdminTables();
+  updateAdminStats();
+});
+
+// Testimonial form functions
+function openTestimonialForm(id = null) {
+  document.getElementById('testimonialFormModal').style.display = 'block';
+  
+  if (id) {
+    // Edit mode
+    const testimonial = testimonialsData[id];
+    document.getElementById('testimonialFormTitle').textContent = 'Edit Testimonial';
+    document.getElementById('testimonialId').value = id;
+    document.getElementById('testimonialName').value = testimonial.name;
+    document.getElementById('testimonialPosition').value = testimonial.position;
+    document.getElementById('testimonialCompany').value = testimonial.company;
+    document.getElementById('testimonialText').value = testimonial.text;
+    document.getElementById('testimonialImage').value = testimonial.image || '';
+    document.getElementById('testimonialRating').value = testimonial.rating;
+  } else {
+    // Add mode
+    document.getElementById('testimonialFormTitle').textContent = 'Add Testimonial';
+    document.getElementById('testimonialForm').reset();
+    document.getElementById('testimonialId').value = '';
+  }
+}
+
+function closeTestimonialForm() {
+  document.getElementById('testimonialFormModal').style.display = 'none';
+}
+
+// Testimonial form submission
+document.getElementById('testimonialForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const id = document.getElementById('testimonialId').value;
+  const name = document.getElementById('testimonialName').value;
+  const position = document.getElementById('testimonialPosition').value;
+  const company = document.getElementById('testimonialCompany').value;
+  const text = document.getElementById('testimonialText').value;
+  const image = document.getElementById('testimonialImage').value;
+  const rating = parseInt(document.getElementById('testimonialRating').value);
+  
+  if (id) {
+    // Update existing testimonial
+    testimonialsData[id] = { name, position, company, text, image, rating };
+  } else {
+    // Add new testimonial
+    const newId = Date.now().toString();
+    testimonialsData[newId] = { name, position, company, text, image, rating };
+  }
+  
+  closeTestimonialForm();
+  loadTestimonials();
+  loadAdminTables();
+});
+
+// Edit functions
+function editPortfolioItem(id) {
+  openPortfolioForm(id);
+}
+
+function editFeaturedItem(id) {
+  openFeaturedForm(id);
+}
+
+function editTestimonialItem(id) {
+  openTestimonialForm(id);
 }
 
 // Delete functions
@@ -1885,6 +2497,7 @@ function deletePortfolioItem(id) {
     delete portfolioData[id];
     loadPortfolioItems();
     loadAdminTables();
+    updateAdminStats();
   }
 }
 
@@ -1893,6 +2506,7 @@ function deleteFeaturedItem(id) {
     delete featuredData[id];
     loadFeaturedItems();
     loadAdminTables();
+    updateAdminStats();
   }
 }
 
@@ -1900,10 +2514,75 @@ function deleteReview(id) {
   if (confirm('Are you sure you want to delete this review?')) {
     delete reviewsData[id];
     loadReviews();
-    loadAllReviews();
+    loadAdminTables();
+    updateAdminStats();
+  }
+}
+
+function deleteTestimonialItem(id) {
+  if (confirm('Are you sure you want to delete this testimonial?')) {
+    delete testimonialsData[id];
+    loadTestimonials();
     loadAdminTables();
   }
 }
+
+// Animated counter for stats
+function animateCounter() {
+  const counters = document.querySelectorAll('.stat-number');
+  const speed = 200;
+  
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    const increment = target / speed;
+    
+    const updateCount = () => {
+      const count = +counter.innerText;
+      
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 1);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    
+    updateCount();
+  });
+}
+
+// Scroll animations
+function handleScrollAnimations() {
+  const elements = document.querySelectorAll('.stat-item, .featured-item, .card, .review-card, .testimonial-item');
+  
+  elements.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const elementVisible = 150;
+    
+    if (elementTop < window.innerHeight - elementVisible) {
+      element.classList.add('visible');
+    } else {
+      element.classList.remove('visible');
+    }
+  });
+  
+  // Trigger counter animation when stats section is in view
+  const statsSection = document.getElementById('stats');
+  const statsTop = statsSection.getBoundingClientRect().top;
+  
+  if (statsTop < window.innerHeight - 200 && !statsSection.classList.contains('counted')) {
+    animateCounter();
+    statsSection.classList.add('counted');
+  } else if (statsTop > window.innerHeight) {
+    statsSection.classList.remove('counted');
+    // Reset counters
+    document.querySelectorAll('.stat-number').forEach(counter => {
+      counter.innerText = '0';
+    });
+  }
+}
+
+window.addEventListener('scroll', handleScrollAnimations);
 
 // Initialize with sample data
 portfolioData = {
@@ -1986,10 +2665,41 @@ reviewsData = {
   }
 };
 
+testimonialsData = {
+  '1': {
+    name: 'Sarah Johnson',
+    position: 'CEO',
+    company: 'TechStart',
+    text: 'Working with CreativeAgency was an absolute pleasure. They understood our vision perfectly and delivered a brand identity that exceeded our expectations. Highly recommended!',
+    rating: 5,
+    googleReview: true
+  },
+  '2': {
+    name: 'Michael Chen',
+    position: 'Marketing Director',
+    company: 'RetailHub',
+    text: 'The website design created by CreativeAgency has transformed our online presence. Our conversion rates have increased by 40% since launch. Exceptional work!',
+    rating: 5,
+    googleReview: false
+  },
+  '3': {
+    name: 'Emily Rodriguez',
+    position: 'Founder',
+    company: 'BeautyBrand',
+    text: 'CreativeAgency brought our social media to life with stunning visuals that perfectly capture our brand essence. Our engagement has never been higher!',
+    rating: 4,
+    googleReview: true
+  }
+};
+
 // Load initial data
 loadPortfolioItems();
 loadFeaturedItems();
 loadReviews();
+loadTestimonials();
+
+// Initial scroll check
+handleScrollAnimations();
 </script>
 
 </body>
